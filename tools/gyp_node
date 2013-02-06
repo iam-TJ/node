@@ -12,7 +12,25 @@ import gyp
 
 # Directory within which we want all generated files (including Makefiles)
 # to be written.
-output_dir = os.path.join(os.path.abspath(node_root), 'out')
+outopt = '-O'
+outdir = 'out'
+for arg in sys.argv:
+  if outdir == "":
+    outdir = arg
+    #sys.argv.remove(arg)
+    break
+
+  if arg == outopt:
+    # the empty string indicates the next argument should replace the value
+    outdir = ""
+    #sys.argv.remove(arg)
+
+if outdir != 'out':
+    sys.argv.remove(outopt)
+    sys.argv.remove(outdir)
+
+output_dir = os.path.join(os.path.abspath(node_root), outdir)
+print 'Output directory:', outdir
 
 def run_gyp(args):
   rc = gyp.main(args)
