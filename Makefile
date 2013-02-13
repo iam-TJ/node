@@ -72,7 +72,7 @@ distclean:
 	-rm -f Makefile
 
 clean-test:
-	-rm -rf $(builddir)test
+	-rm -rf $(builddir)test/tmp
 
 test: all clean-test test-nested-index
 	$(PYTHON) $(srcdir)tools/test.py --mode=release simple message
